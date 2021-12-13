@@ -4,16 +4,26 @@ import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 
-@ConfigGroup("example")
+@ConfigGroup("give_task")
 public interface GiveTaskConfig extends Config
 {
 	@ConfigItem(
-			keyName = "Give Task",
-			name = "",
-			description = "The current task"
+			position = 1,
+			keyName = "overlay",
+			name = "Task Overlay",
+			description = "Display overlay of current task"
 	)
 	default boolean overlay()
 	{
-		return false;
+		return true;
+	}
+	@ConfigItem(
+			position = 2,
+			keyName = "currentTask",
+			name = "Current Task",
+			description = "Your current task"
+	)
+	default String currentTask(){
+		return "";
 	}
 }
