@@ -10,7 +10,7 @@ public interface GiveTaskConfig extends Config
 	@ConfigItem(
 			position = 1,
 			keyName = "overlay",
-			name = "task overlay",
+			name = "Task Overlay",
 			description = "Display overlay of current task"
 	)
 	default boolean overlay()
@@ -24,6 +24,6 @@ public interface GiveTaskConfig extends Config
 			description = "Your current task"
 	)
 	default String currentTask(){
-		return "Current Task: ";
+		return "";
 	}
 }

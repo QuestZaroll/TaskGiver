@@ -27,6 +27,9 @@ public class GiveTaskPlugin extends Plugin
 	private OverlayManager overlayManager;
 
 	@Inject
+	private ConfigManager configManager;
+
+	@Inject
 	private Client client;
 
 	@Inject
@@ -61,10 +64,10 @@ public class GiveTaskPlugin extends Plugin
 				&& (messageNode.getType().equals(ChatMessageType.PUBLICCHAT)
 				|| messageNode.getType().equals(ChatMessageType.MODCHAT))){
 				taskString = message.replaceFirst(NEW_TASK, "");
-
-
-
+				configManager.setConfiguration(CONFIG_GROUP, "currentTask",
+						taskString);
 			log.info("task inputted: " + taskString);
+
 		}
 	}
 

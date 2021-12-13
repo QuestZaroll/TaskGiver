@@ -23,7 +23,7 @@ public class TaskOverlay extends OverlayPanel {
     @Inject
     private TaskOverlay(Client client, GiveTaskPlugin plugin){
         super(plugin);
-        setPosition(OverlayPosition.TOP_CENTER);
+            setPosition(OverlayPosition.BOTTOM_LEFT);
         this.client = client;
         this.plugin = plugin;
         getMenuEntries().add(new OverlayMenuEntry(RUNELITE_OVERLAY_CONFIG, OPTION_CONFIGURE, "Task overlay"
@@ -33,12 +33,11 @@ public class TaskOverlay extends OverlayPanel {
     @Override
     public Dimension render(Graphics2D graphics)
     {
-        String text = config.currentTask();
-        String task = plugin.getTaskString();
+        String task = "Current Task: " + config.currentTask();
 
         if(config.overlay()){
             panelComponent.getChildren().add(LineComponent.builder()
-                    .left(text + task)
+                    .left(task)
                     .leftColor(Color.GREEN)
                     .build());
 
@@ -49,7 +48,7 @@ public class TaskOverlay extends OverlayPanel {
 //            );
 
             panelComponent.setPreferredSize(new Dimension(
-                    graphics.getFontMetrics().stringWidth(text + task) + 10,
+                    graphics.getFontMetrics().stringWidth(task) + 10,
                     0));
         }
 
