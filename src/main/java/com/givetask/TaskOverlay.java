@@ -4,6 +4,7 @@ import net.runelite.api.Client;
 import net.runelite.client.ui.overlay.OverlayMenuEntry;
 import net.runelite.client.ui.overlay.OverlayPanel;
 import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.client.ui.overlay.components.LineComponent;
 import net.runelite.client.ui.overlay.components.TitleComponent;
 
 import javax.inject.Inject;
@@ -25,18 +26,33 @@ public class TaskOverlay extends OverlayPanel {
         setPosition(OverlayPosition.TOP_CENTER);
         this.client = client;
         this.plugin = plugin;
-        getMenuEntries().add(new OverlayMenuEntry(RUNELITE_OVERLAY_CONFIG, OPTION_CONFIGURE, ""
+        getMenuEntries().add(new OverlayMenuEntry(RUNELITE_OVERLAY_CONFIG, OPTION_CONFIGURE, "Task overlay"
         ));
     }
 
     @Override
     public Dimension render(Graphics2D graphics)
     {
-        panelComponent.getChildren().add(TitleComponent.builder()
-                .text("Current Task" + plugin.getTaskString())
-                .color(Color.GREEN)
-                .build()
-        );
+        String text = config.currentTask();
+        String task = plugin.getTaskString();
+
+        if(config.overlay()){
+            panelComponent.getChildren().add(LineComponent.builder()
+                    .left(text + task)
+                    .leftColor(Color.GREEN)
+                    .build());
+
+//            panelComponent.getChildren().add(TitleComponent.builder()
+//                    .text("Current Task: " + plugin.getTaskString())
+//                    .color(Color.GREEN)
+//                    .build()
+//            );
+
+            panelComponent.setPreferredSize(new Dimension(
+                    graphics.getFontMetrics().stringWidth(text + task) + 10,
+                    0));
+        }
+
 
         return super.render(graphics);
     }
